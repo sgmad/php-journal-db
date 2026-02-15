@@ -7,12 +7,10 @@ if (isset($_GET['id'])) {
     $stmt = $conn->prepare("DELETE FROM journal WHERE id = ?");
     $stmt->bind_param("i", $id);
 
-    if ($stmt->execute()) {
-        header("Location: index.php");
-    } else {
-        echo "Error deleting record: " . $conn->error;
-    }
+    $stmt->execute();
     $stmt->close();
+    
+    header("Location: index.php");
 }
 $conn->close();
 ?>
